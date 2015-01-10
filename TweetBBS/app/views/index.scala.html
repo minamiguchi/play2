@@ -1,10 +1,8 @@
-@(tweets: List[Tweet], tweetForm: Form[Tweet])
+@(currentPage: com.avaje.ebean.Page[Tweet], tweetForm: Form[Tweet])
 
 @import helper._
 
 @main("Tweet BBS") {
-	<!--<h1>@tweets.size() tweet(s)</h1>-->
-
     @form(routes.Application.newTweet()) {
 
         @inputText(tweetForm("content"))
@@ -13,7 +11,7 @@
     }
     
     <ul>
-        @for(tweet <- tweets) {
+        @for(tweet <- currentPage.getList) {
             <li>
                 @tweet.postDate
                 @tweet.content
@@ -24,4 +22,14 @@
             </li>
         }
     </ul>
+
+    @if(currentPage.hasPrev()) {
+        <a href="/tweets?page=@(currentPage.getPageIndex() - 1)">前へ</a>
+    }
+    @if(currentPage.hasPrev() && currentPage.hasNext()) {
+        /
+    }
+    @if(currentPage.hasNext()) {
+        <a href="/tweets?page=@(currentPage.getPageIndex() + 1)">次へ</div>
+    }
 }

@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index()
 
 # TweetBBS
-GET     /tweets                     controllers.Application.tweets()
+GET     /tweets                     controllers.Application.tweets(page: Int)
 POST    /tweets                     controllers.Application.newTweet()
 GET     /tweets/:id/delete          controllers.Application.deleteTweet(id: Long)
 
