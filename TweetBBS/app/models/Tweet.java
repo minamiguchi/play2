@@ -13,9 +13,6 @@ import com.avaje.ebean.Page;
 
 @Entity
 public class Tweet extends Model {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final int PAGING_SIZE = 10;
 	private static final int MAX_MSG_LENGTH = 140;
@@ -43,8 +40,14 @@ public class Tweet extends Model {
 		return find.all();
 	}
 
+	/**
+	 * ページング取得
+	 * 
+	 * @param pageNo
+	 * @return PAGING_SIZEで設定されたリストを持つページ
+	 */
 	public static Page<Tweet> page(int pageNo) {
-		return find.where().orderBy("post_date ASC")
+		return find.where().orderBy("post_date DESC")
 				.findPagingList(PAGING_SIZE).getPage(pageNo);
 	}
 

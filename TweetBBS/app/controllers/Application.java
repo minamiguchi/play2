@@ -31,13 +31,13 @@ public class Application extends Controller {
 	 * 
 	 * @return
 	 */
-	public static Result newTweet() {
+	public static Result newTweet(int page) {
 		Form<Tweet> filledForm = tweetForm.bindFromRequest();
 		if (filledForm.hasErrors()) {
 			return badRequest(views.html.index.render(Tweet.page(0), tweetForm));
 		} else {
 			Tweet.create(filledForm.get());
-			return redirect(routes.Application.tweets(0));
+			return redirect(routes.Application.tweets(page));
 		}
 	}
 
@@ -47,8 +47,8 @@ public class Application extends Controller {
 	 * @param id
 	 * @return
 	 */
-	public static Result deleteTweet(Long id) {
+	public static Result deleteTweet(Long id, int page) {
 		Tweet.delete(id);
-		return redirect(routes.Application.tweets(0));
+		return redirect(routes.Application.tweets(page));
 	}
 }

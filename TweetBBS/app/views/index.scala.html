@@ -3,22 +3,21 @@
 @import helper._
 
 @main("Tweet BBS") {
-    @form(routes.Application.newTweet()) {
-
-        @inputText(tweetForm("content"))
-
+    @form(routes.Application.newTweet(currentPage.getPageIndex())) {
+        <textarea id="content" name="content"></textarea>
+        @for(error <- tweetForm("content").errors) {
+            <p>@Messages(error.message)</p>
+        }
         <input type="submit" value="送信">
     }
     
     <ul>
         @for(tweet <- currentPage.getList) {
-            <li>
-                @tweet.postDate
-                @tweet.content
-
-                @form(routes.Application.deleteTweet(tweet.id)) {
-                    <input type="submit" value="削除">
-                }
+            <li style="list-style-type: none;">
+                <span style="float:left;margin-right:10px;">@tweet.postDate</span>
+                <span >@tweet.content</span>
+                
+                <a href="action(controllers.Application.deleteTweet(tweet.id, currentPage.getPageIndex()))">削除</a>
             </li>
         }
     </ul>

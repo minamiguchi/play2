@@ -7,8 +7,8 @@ GET     /                           controllers.Application.index()
 
 # TweetBBS
 GET     /tweets                     controllers.Application.tweets(page: Int)
-POST    /tweets                     controllers.Application.newTweet()
-GET     /tweets/:id/delete          controllers.Application.deleteTweet(id: Long)
+POST    /tweets                     controllers.Application.newTweet(page: Int)
+GET     /tweets/:id/delete          controllers.Application.deleteTweet(id: Long, page: Int)
 
 # Assets
 GET     /assets/*file               controllers.Assets.at(path="/public",file)
