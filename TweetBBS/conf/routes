@@ -1,0 +1,14 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+# TweetBBS
+GET     /tweets                     controllers.Application.tweets()
+POST    /tweets                     controllers.Application.newTweet()
+GET     /tweets/:id/delete          controllers.Application.deleteTweet(id: Long)
+
+# Assets
+GET     /assets/*file               controllers.Assets.at(path="/public",file)

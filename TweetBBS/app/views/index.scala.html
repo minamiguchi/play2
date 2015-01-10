@@ -1,0 +1,27 @@
+@(tweets: List[Tweet], tweetForm: Form[Tweet])
+
+@import helper._
+
+@main("Tweet BBS") {
+	<!--<h1>@tweets.size() tweet(s)</h1>-->
+
+    @form(routes.Application.newTweet()) {
+
+        @inputText(tweetForm("content"))
+
+        <input type="submit" value="送信">
+    }
+    
+    <ul>
+        @for(tweet <- tweets) {
+            <li>
+                @tweet.postDate
+                @tweet.content
+
+                @form(routes.Application.deleteTweet(tweet.id)) {
+                    <input type="submit" value="削除">
+                }
+            </li>
+        }
+    </ul>
+}
